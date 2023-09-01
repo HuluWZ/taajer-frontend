@@ -1,0 +1,81 @@
+<body>
+      <section class="table-part">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+  <table class="responsive-table">
+    <!-- Responsive Table Header Section -->
+    <thead class="responsive-table__head">
+      <tr class="responsive-table__row">
+        <th class="responsive-table__head__title responsive-table__head__title--name">Name
+        <th class="responsive-table__head__title responsive-table__head__title--types">Type</th>
+        <th class="responsive-table__head__title responsive-table__head__title--update">Price</th>
+                <th class="responsive-table__head__title responsive-table__head__title--update">Features</th>
+        <th class="responsive-table__head__title responsive-table__head__title--update">Status</th>
+        <th class="responsive-table__head__title responsive-table__head__title--country">Data</th>
+      </tr>
+    </thead>
+          <tbody class="responsive-table__body">
+          </tbody>
+     </table>
+     </div>
+    </div>
+
+     </div>  
+     </section>   
+</body>
+<script>
+  
+document.addEventListener("DOMContentLoaded", () => {
+const tbody = document.querySelector("tbody");
+
+// Fetch data from the backend
+   
+// Function to populate the table with data
+function populateTable(data) {
+const tbody = document.querySelector("tbody"); // Get the tbody element
+
+data.forEach((plan) => {
+  console.log(" Plan ",plan);
+const row = document.createElement("tr"); // Create a table row element
+
+row.innerHTML = `
+<td class="table-user">
+  <b>${plan.name}</b>
+</td>
+<td>
+  <span>${plan.type}</span>
+</td>
+<td>
+  <span>${plan.price}</span>
+</td>
+<td>
+  <span>${plan.features.length}</span>
+</td>
+<td>
+  <label class="custom-toggle">
+    <input type="checkbox" ${ plan.status == "Active" ? "checked" : "" } />
+    <span class="custom-toggle-slider rounded-circle" data-label-on="Yes" data-label-off="No"></span>
+  </label>
+</td>
+<td>
+  <a href=${plan.data} target="_blank">Link</a>
+</td>
+`;
+
+tbody.appendChild(row); // Append the row to the table body
+});
+}
+  fetch("https://database-backend-fh2d.onrender.com/package/")
+    .then((response) => response.json())
+    .then((data) => {
+      populateTable(data);
+    })
+    .catch((error) => {
+      console.error("Error fetching data:", error);
+    });
+
+
+});
+
+</script>
